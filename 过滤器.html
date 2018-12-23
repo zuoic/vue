@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg | msgNew('--','yasuo')}}</p>
+    </div>
+    <script>
+        Vue.filter('msgNew', function (msg, arg, arg1) {
+            return msg.replace(/123/g, arg + arg1)
+        })
+
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '吾之初心,永世不忘123'
+            }
+        })
+    </script>
+</body>
+
+</html>
