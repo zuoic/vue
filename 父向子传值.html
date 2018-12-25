@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" @click="msg='父数据改了'" value="父组件中修改数据">
+        <com1 @show123="show" :parentmsg="msg"></com1>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: { content: '父组件的数据' },
+
+                sonMsg: ''
+            },
+            methods:{
+                show(data){
+                    this.sonMsg = data
+                }
+            },
+            components:{
+                com1:{
+                    data(){
+                        return{
+                            title:'123',
+                            content:'qqq'
+                        }
+                    },
+                    template:'<h1 @click="change">子组件....{{parentmsg.content}}</h1>',
+                    props:['parentmsg'],
+                    // filters:{},
+                    // components:{},
+                    methods:{
+                        change(){
+                            this.$emit('show123','我尝试着传个数据')
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
